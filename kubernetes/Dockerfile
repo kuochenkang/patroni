@@ -3,13 +3,13 @@ LABEL maintainer="Alexander Kukushkin <akukushkin@microsoft.com>"
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'APT::Install-Recommends "0";\nAPT::Install-Suggests "0";' > /etc/apt/apt.conf.d/01norecommend \
-    && mkdir /usr/local/share/ca-certificates/ \
-    && echo $CSC_Root_2026 > /usr/local/share/ca-certificates/CSC_Root_2026.crt \
-    && update-ca-certificates \
     && apt-get update -y \
     && apt-cache depends patroni | sed -n -e 's/.* Depends: \(python3-.\+\)$/\1/p' \
             | grep -Ev '^python3-(sphinx|etcd|consul|kazoo|kubernetes)' \
             | xargs apt-get install -y vim-tiny curl jq locales git python3-pip python3-wheel \
+    && mkdir /usr/local/share/ca-certificates/ \
+    && echo $CSC_Root_2026 > /usr/local/share/ca-certificates/CSC_Root_2026.crt \
+    && update-ca-certificates \
     ## Make sure we have a en_US.UTF-8 locale available
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
     && pip3 install setuptools \
