@@ -7,7 +7,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-cache depends patroni | sed -n -e 's/.* Depends: \(python3-.\+\)$/\1/p' \
             | grep -Ev '^python3-(sphinx|etcd|consul|kazoo|kubernetes)' \
             | xargs apt-get install -y vim-tiny curl jq locales git python3-pip python3-wheel \
-    && mkdir /usr/local/share/ca-certificates/ \
     && echo $CSC_Root_2026 > /usr/local/share/ca-certificates/CSC_Root_2026.crt \
     && update-ca-certificates \
     ## Make sure we have a en_US.UTF-8 locale available
