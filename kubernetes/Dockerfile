@@ -3,6 +3,7 @@ LABEL maintainer="Alexander Kukushkin <akukushkin@microsoft.com>"
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'APT::Install-Recommends "0";\nAPT::Install-Suggests "0";' > /etc/apt/apt.conf.d/01norecommend \
+    && mkdir /usr/local/share/ca-certificates/ \
     && echo $CSC_Root_2026 > /usr/local/share/ca-certificates/CSC_Root_2026.crt \
     && update-ca-certificates \
     && apt-get update -y \
