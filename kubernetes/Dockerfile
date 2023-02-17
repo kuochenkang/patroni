@@ -1,12 +1,10 @@
 FROM postgres:15
 LABEL maintainer="Alexander Kukushkin <akukushkin@microsoft.com>"
 
-# Install ca-certificates
-RUN sudo echo $CSC_Root_2026 >> /usr/local/share/ca-certificates/CSC_Root_2026.crt
-RUN sudo update-ca-certificates
-
 RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'APT::Install-Recommends "0";\nAPT::Install-Suggests "0";' > /etc/apt/apt.conf.d/01norecommend \
+    && echo $CSC_Root_2026 > /usr/local/share/ca-certificates/CSC_Root_2026.crt \
+    && update-ca-certificates \
     && apt-get update -y \
     && apt-cache depends patroni | sed -n -e 's/.* Depends: \(python3-.\+\)$/\1/p' \
             | grep -Ev '^python3-(sphinx|etcd|consul|kazoo|kubernetes)' \
