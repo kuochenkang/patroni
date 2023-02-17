@@ -109,7 +109,7 @@ objects:
           - sh
           - -c 
           - "mkdir -p /home/postgres/pgdata/pgroot/data && chmod 0700 /home/postgres/pgdata/pgroot/data"
-          image: docker-registry.default.svc:5000/${NAMESPACE}/patroni:latest
+          image: image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/patroni:latest
           imagePullPolicy: IfNotPresent
           name: fix-perms
           resources: {}
@@ -163,7 +163,7 @@ objects:
             value: 0.0.0.0:5432
           - name: PATRONI_RESTAPI_LISTEN
             value: 0.0.0.0:8008
-          image: docker-registry.default.svc:5000/${NAMESPACE}/patroni:latest
+          image: image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/patroni:latest
           imagePullPolicy: IfNotPresent
           name: ${APPLICATION_NAME}
           readinessProbe:
