@@ -2,7 +2,7 @@ FROM postgres:15
 LABEL maintainer="Alexander Kukushkin <akukushkin@microsoft.com>"
 
 # Install ca-certificates
-RUN echo CSC_Root_2026 >> /usr/local/share/ca-certificates/CSC_Root_2026.crt
+RUN echo $CSC_Root_2026 >> /usr/local/share/ca-certificates/CSC_Root_2026.crt
 RUN sudo update-ca-certificates
 
 RUN export DEBIAN_FRONTEND=noninteractive \
