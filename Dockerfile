@@ -17,9 +17,8 @@ ARG LANG
 ENV ETCDVERSION=3.3.13 CONFDVERSION=0.16.0
 
 # Install ca-certificates
-RUN echo CSC_Root_2026 >> /usr/share/ca-certificates/CSC_Root_2026.crt
-RUN echo CSC_Root_2026.crt >> /etc/ca-certificates.conf
-RUN update-ca-certificates
+RUN echo CSC_Root_2026 >> /usr/local/share/ca-certificates/CSC_Root_2026.crt
+RUN sudo update-ca-certificates
 
 RUN set -ex \
     && export DEBIAN_FRONTEND=noninteractive \
