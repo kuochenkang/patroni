@@ -15,12 +15,11 @@ ARG LC_ALL
 ARG LANG
 
 ENV ETCDVERSION=3.3.13 CONFDVERSION=0.16.0
-ENV http_proxy=http://172.20.199.215:3128/ https_proxy=http://172.20.199.215:3128/ HTTP_PROXY=http://172.20.199.215:3128/ HTTPS_PROXY=http://172.20.199.215:3128/
 
 # Install ca-certificates
-COPY CSC_Root_2026.crt /usr/share/ca-certificates/
+RUN echo CSC_Root_2026 >> /usr/share/ca-certificates/CSC_Root_2026.crt
 RUN echo CSC_Root_2026.crt >> /etc/ca-certificates.conf
-# RUN update-ca-certificates
+RUN update-ca-certificates
 
 RUN set -ex \
     && export DEBIAN_FRONTEND=noninteractive \
